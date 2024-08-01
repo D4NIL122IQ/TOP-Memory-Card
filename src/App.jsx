@@ -6,15 +6,21 @@ import Acceuil from './components/acceuil'
 import Game from './components/game.jsx';
 import Lose from './components/lose.jsx';
 import Win from './components/win.jsx';
+import Loader from './components/loader.jsx';
 
 function App() {
     const [score ,setScore] = useState(0)
     const [highestScore , setHighestScore] = useState(0)
     const [displayAcceuil , setDisplayAcceuil] = useState(true)
     const [displayGame , setDisplayGame] = useState(false)
+    const [displayLoader , setDisplayLoader] = useState(true)
     const [displayModalLose , setDisplayModalLose] = useState(false)
     const [displayModalWin , setDisplayModalWin] = useState(false)
     const [diffic , setDiff] = useState({})
+
+    const handleCloseLoader = ()=>{
+        setDisplayLoader(false)
+    }
 
     const handleUpadateScore =()=>{
         if (score == highestScore) {
@@ -45,9 +51,11 @@ function App() {
     }
 
     const styleModal ={}
-
+    window.addEventListener('load', handleCloseLoader);
     return (
-        <>
+        <>  
+            
+            {displayLoader && <div className='loader'></div>}
             <header>
                 <h3>Memory Card</h3>
                 <div>

@@ -15,8 +15,6 @@ function App() {
     const [displayModalLose , setDisplayModalLose] = useState(false)
     const [displayModalWin , setDisplayModalWin] = useState(false)
     const [diffic , setDiff] = useState({})
-    
-    console.log(diffic)
 
     const handleUpadateScore =()=>{
         if (score == highestScore) {
@@ -51,7 +49,7 @@ function App() {
     return (
         <>
             <header>
-                <h3>Momery Card</h3>
+                <h3>Memory Card</h3>
                 <div>
                     <p>Score: {score}</p>
                     <p>meilleur score: {highestScore} </p>

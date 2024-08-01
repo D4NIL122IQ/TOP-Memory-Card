@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import Card from "./recupCarte.jsx"
-
+import Loader from "./loader.jsx"
 import { getRandomNumber } from "../hook/getRandm.js"
 
-export default function Game({difficulter , limit, updatescore , endGame , lose , win, updatescorelose}){
+export default function Game({difficulter , limit, updatescore  , lose , win, updatescorelose}){
 
     const [pokemon , setPokemon] = useState([])
     const [displayLoader , setDisplayLoader] = useState(true)
@@ -11,6 +11,7 @@ export default function Game({difficulter , limit, updatescore , endGame , lose 
     const handleStopLoading = ()=>{
         setDisplayLoader(false)
     }
+
     useEffect( ()=>{
         const start = getRandomNumber()
         const getPokemone = async ()=>{ 
@@ -33,9 +34,18 @@ export default function Game({difficulter , limit, updatescore , endGame , lose 
                 const j = Math.floor(Math.random() * (i + 1));
                 [arr[i], arr[j]] = [arr[j], arr[i]];
             }
-        
              return arr;
         })
+    }
+
+    const verify = ()=>{
+        const temp = [...pokemon]
+        let checkedcmp = 0
+        temp.map((t)=>{(t.clicked)? checkedcmp++ : null})
+
+        if (checkedcmp == limit ) {
+            win()
+        }
     }
 
     const verifyGame = (index)=>{
@@ -44,6 +54,7 @@ export default function Game({difficulter , limit, updatescore , endGame , lose 
             updatescore()
             temp[index].clicked = true
             setPokemon(temp)
+            verify()
             mixArray()
         }else{
             updatescorelose()
@@ -51,20 +62,11 @@ export default function Game({difficulter , limit, updatescore , endGame , lose 
         } 
     }
 
-    useEffect(()=>{
-        const verify = ()=>{
-            console.log("hello")
-        }
-        return ()=> verify()
-    },[pokemon])
-
-
-
     return (
         <div className="cardContainer">
-            {displayLoader && <Load />}
+            {displayLoader && <Loader />}
             {pokemon.map((pk, i)=>{
-                return <Card pokeurl={pk.url} mixed={mixArray} index={i} verify={verifyGame}  key={pk.name}/>
+                return <Card pokeurl={pk.url} mixed={mixArray} index={i} verify={verifyGame} key={pk.name}/>
             })}
         </div>
     )

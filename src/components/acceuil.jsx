@@ -1,4 +1,5 @@
 import { FaGithub } from "react-icons/fa";
+import { TbPokeball } from "react-icons/tb";
 
 export default function Acceuil({modifDiff , modifDisplay , modifGame}){
 
@@ -10,16 +11,16 @@ export default function Acceuil({modifDiff , modifDisplay , modifGame}){
 
     return(
         <div className="aceuille">
-            <h3 onClick={()=>{
+            <h2 onClick={()=>{
                 clicked("easy" , 3)
-            }}>Facile</h3>
-            <h3 onClick={()=>{
+            }}><TbPokeball />Facile</h2>
+            <h2 onClick={()=>{
                 clicked("average" , 5)
-            }}>Moyen</h3>
-            <h3 onClick={()=>{
+            }}><TbPokeball />Moyen</h2>
+            <h2 onClick={()=>{
                 clicked("hard" , 10)
-            }}>Difficile</h3>
-            <h3><FaGithub/><a href="https://github.com/D4NIL122IQ/TOP-Memory-Card/" target="_blank" rel="noopener noreferrer">Visit repo</a></h3>
+            }}><TbPokeball />Difficile</h2>
+            <h2><FaGithub/><a href="https://github.com/D4NIL122IQ/TOP-Memory-Card/" target="_blank" rel="noopener noreferrer">Visite repo ?</a></h2>
         </div>
     )
 }

@@ -1,0 +1,71 @@
+*,::after,::before {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+@font-face {
+    font-family: 'pokefont';
+    src: url(./font/Pokemon_Solid.ttf) format('truetype');
+}
+body{
+    background-image: url(../assets/background_pc.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    
+}
+
+.aceuille{
+    margin: 0px auto;
+    border: 1px solid black;
+}
+
+#root{
+    background-color: #00000189;
+    color: white;
+    height: 100vh;
+    font-family: 'pokefont' , sans-serif;
+}
+.cardContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card{
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 60px;
+    aspect-ratio: 1;
+    --g: conic-gradient(from -90deg at 10px 10px,#fff 90deg,#0000 0);
+    background: var(--g), var(--g), var(--g);
+    background-size: 50% 50%;
+    animation: l16 1s infinite;
+  }
+  @keyframes l16 {
+     0%   {background-position:0    0   ,10px 10px,20px 20px} 
+     50%  {background-position:0    20px,10px 10px,20px 0   } 
+     100% {background-position:20px 20px,10px 10px,0    0   } 
+  }
+
+@media screen and (max-width: 620px) {
+    body{
+        background-image: url(../assets/background_mobile.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+    }
+}

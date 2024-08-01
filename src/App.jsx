@@ -1,35 +1,81 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react'
+import Modal from 'react-modal'
+import './css/style.css'
+
+import Acceuil from './components/acceuil'
+import Game from './components/game.jsx';
+import Lose from './components/lose.jsx';
+import Win from './components/win.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [score ,setScore] = useState(0)
+    const [highestScore , setHighestScore] = useState(0)
+    const [displayAcceuil , setDisplayAcceuil] = useState(true)
+    const [displayGame , setDisplayGame] = useState(false)
+    const [displayModalLose , setDisplayModalLose] = useState(false)
+    const [displayModalWin , setDisplayModalWin] = useState(false)
+    const [diffic , setDiff] = useState({})
+    
+    console.log(diffic)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const handleUpadateScore =()=>{
+        if (score == highestScore) {
+            setScore(score+1)
+            setHighestScore(highestScore+1)
+        }else{
+            setScore(score+1)
+        }
+    }
+    const handleloseScore = ()=>{
+        setScore(0)
+    }
+    const handleCloseLose = ()=>{
+        setDisplayModalLose(false)
+    }
+    const handleOpenLose =()=>{
+        setDisplayModalLose(true)
+        setDisplayGame(false)
+        setDisplayAcceuil(true)
+    }
+    const handleCloseWin = ()=>{
+        setDisplayModalWin(false)
+        setDisplayGame(false)
+        setDisplayAcceuil(true)
+    }
+    const handleOpenWin =()=>{
+        setDisplayModalWin(true)
+    }
+
+    const styleModal ={}
+
+    return (
+        <>
+            <header>
+                <h3>Momery Card</h3>
+                <div>
+                    <p>Score: {score}</p>
+                    <p>meilleur score: {highestScore} </p>
+                </div>
+            </header>
+
+            <section>
+                {displayAcceuil && <Acceuil modifDisplay={setDisplayAcceuil} modifGame={setDisplayGame} modifDiff={setDiff}/>}
+            
+                {displayGame && <Game difficulter={diffic.diff} limit={diffic.limit} 
+                                        updatescore={handleUpadateScore} updatescorelose={handleloseScore} 
+                                        lose={handleOpenLose} win={handleOpenWin}
+                                        />}
+            </section>
+
+            <Modal isOpen={displayModalWin} onRequestClose={()=>{handleCloseWin}} ariaHideApp={false}>
+                <Win close={handleCloseWin}/>
+            </Modal>
+
+            <Modal isOpen={displayModalLose} onRequestClose={()=>{handleCloseLose}} ariaHideApp={false}>
+                <Lose close={handleCloseLose}/>
+            </Modal>
+        </>
+    )
 }
 
 export default App

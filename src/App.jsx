@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import './css/style.css'
+import { SiPokemon } from "react-icons/si";
 
 import Acceuil from './components/acceuil'
 import Game from './components/game.jsx';
@@ -50,14 +51,30 @@ function App() {
         setDisplayModalWin(true)
     }
 
-    const styleModal ={}
+    const styleModal ={
+        content: {
+            color: 'black',
+            width: '470px',
+            height: "200px",
+            padding: '0pxx',
+            borderRadius: '0px',
+            margin: '100px auto',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            textAlign:"center",
+            backdropFilter: "blur(5px)"
+          },
+        }
     window.addEventListener('load', handleCloseLoader);
     return (
         <>  
             
             {displayLoader && <div className='loader'></div>}
             <header>
-                <h3>Memory Card</h3>
+                <h3 onClick={()=>{setDisplayGame(false);
+                                    handleloseScore();
+                                    setDisplayAcceuil(true)}}>
+                        <SiPokemon style={{ fontSize:"5rem"}}/>
+                            Memory Card</h3>
                 <div>
                     <p>Score: {score}</p>
                     <p>meilleur score: {highestScore} </p>
@@ -68,17 +85,18 @@ function App() {
                 {displayAcceuil && <Acceuil modifDisplay={setDisplayAcceuil} modifGame={setDisplayGame} modifDiff={setDiff}/>}
             
                 {displayGame && <Game difficulter={diffic.diff} limit={diffic.limit} 
-                                        updatescore={handleUpadateScore} updatescorelose={handleloseScore} 
+                                        updatescore={handleUpadateScore} updatescoreToZero={handleloseScore} 
                                         lose={handleOpenLose} win={handleOpenWin}
                                         />}
             </section>
 
-            <Modal isOpen={displayModalWin} onRequestClose={()=>{handleCloseWin}} ariaHideApp={false}>
-                <Win close={handleCloseWin}/>
+
+            <Modal isOpen={displayModalWin} onRequestClose={()=>{handleCloseWin}} ariaHideApp={false} style={styleModal} aria-labelledby="modal-modal-title">
+                <Win  close={handleCloseWin}/>
             </Modal>
 
-            <Modal isOpen={displayModalLose} onRequestClose={()=>{handleCloseLose}} ariaHideApp={false}>
-                <Lose close={handleCloseLose}/>
+            <Modal isOpen={displayModalLose} onRequestClose={()=>{handleCloseLose}} ariaHideApp={false} style={styleModal}  aria-describedby="modal-modal-description">
+                <Lose close={handleCloseLose} />
             </Modal>
         </>
     )

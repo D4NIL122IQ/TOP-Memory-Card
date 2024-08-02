@@ -81,14 +81,14 @@ function App() {
                 </div>
             </header>
 
-            <section>
+            { !displayLoader && <section>
                 {displayAcceuil && <Acceuil modifDisplay={setDisplayAcceuil} modifGame={setDisplayGame} modifDiff={setDiff}/>}
             
                 {displayGame && <Game difficulter={diffic.diff} limit={diffic.limit} 
                                         updatescore={handleUpadateScore} updatescoreToZero={handleloseScore} 
                                         lose={handleOpenLose} win={handleOpenWin}
                                         />}
-            </section>
+            </section> }
 
 
             <Modal isOpen={displayModalWin} onRequestClose={()=>{handleCloseWin}} ariaHideApp={false} style={styleModal} aria-labelledby="modal-modal-title">
@@ -98,6 +98,7 @@ function App() {
             <Modal isOpen={displayModalLose} onRequestClose={()=>{handleCloseLose}} ariaHideApp={false} style={styleModal}  aria-describedby="modal-modal-description">
                 <Lose close={handleCloseLose} />
             </Modal>
+           
         </>
     )
 }

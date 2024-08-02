@@ -69,7 +69,7 @@ function App() {
         <>  
             
             {displayLoader && <div className='loader'></div>}
-            <header>
+            {!displayLoader && <header>
                 <h3 onClick={()=>{setDisplayGame(false);
                                     handleloseScore();
                                     setDisplayAcceuil(true)}}>
@@ -79,7 +79,7 @@ function App() {
                     <p>Score: {score}</p>
                     <p>meilleur score: {highestScore} </p>
                 </div>
-            </header>
+            </header>}
 
             { !displayLoader && <section>
                 {displayAcceuil && <Acceuil modifDisplay={setDisplayAcceuil} modifGame={setDisplayGame} modifDiff={setDiff}/>}

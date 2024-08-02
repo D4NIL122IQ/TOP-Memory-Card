@@ -15,12 +15,22 @@ export default function Game({difficulter , limit, updatescore  , lose , win, up
     useEffect( ()=>{
         const start = getRandomNumber()
         const getPokemone = async ()=>{ 
-            const rep = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${start}&limit=${limit}`)
-            const  poke = await rep.json()
-            const pokeupdate = poke.results.map((pk)=>{return {...pk, clicked:false}})
-            setPokemon(pokeupdate)
-            handleStopLoading()
+            try {
+                const rep = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${start}&limit=${limit}`);
+                if (!rep.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                const poke = await rep.json();
+                const pokeupdate = poke.results.map((pk) => ({ ...pk, clicked: false }));
+                setPokemon(pokeupdate);
+              } catch (error) {
+                console.error('Failed to fetch pokemon data:', error);
+              } finally {
+                handleStopLoading();
+              }
         }
+        
+        
        
         return () => getPokemone() 
     }

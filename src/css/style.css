@@ -5,16 +5,23 @@
 }
 @font-face {
     font-family: 'pokefont';
-    src: url(./font/Pokemon_Solid.ttf) format('ttf');
+    src: url(../assets/fonts/Pokemon_Solid.ttf) format('truetype');
 }
 
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: 10vh;
     padding: 0px 20px;
     background-color: #00000189;
+    text-transform: uppercase;
+}
+
+header>h3 , h1{
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 
@@ -23,17 +30,21 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh;
-    max-height: 100%;
-    
+    height: 100vh;
+}
+
+.pokeborder{
+    border: 25px;
+    border-image: url(../assets/frame-hd.png) 42 round;
+    border-style:double;
 }
 
 .aceuille{
-    width: 50%;
-    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.663);
+    color: black;
+    width: 500px;
+    padding: 20px;
     margin: 100px auto;
-    border: 1px solid black;
-    border-radius: 10px;
 }
 
 .aceuille>h2{
@@ -47,8 +58,9 @@ body{
 .aceuille>h2:hover{
     text-decoration: underline;
 }
+
 a{
-    color: white;
+    color: black;
     text-decoration: none;
 }
 a:visited{
@@ -59,18 +71,21 @@ a:visited{
     color: white;
     height: 100vh;
     font-family: 'pokefont' , sans-serif;
+
 }
 .cardContainer{
+    height: 90vh;
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    overflow-y: auto;
 }
 
 .card{
-    border: 3px solid white;
+    border: 3px solid grad;
     cursor: pointer;
     width: 250px;
     height: 300px;
@@ -80,6 +95,19 @@ a:visited{
     align-items: center;
     text-transform: capitalize;
     font-size: x-large;
+    background-image: url(../assets/packed.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#pokename{
+    color: black;
+    background-color: rgba(255, 255, 255, 0.847);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35%;
 }
 hr{
     width: 100%;
@@ -87,7 +115,7 @@ hr{
     border: double;
 }
 .card:hover{
-    box-shadow: 0px 0px 20px black;
+    box-shadow: 0px 0px 20px rgb(254, 254, 254);
 }
 .error{
 
@@ -95,31 +123,60 @@ hr{
     margin: 0px auto;
     
 }
+.select{
+    text-align: start;
+}
+.select>h3{
+    cursor: pointer;
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.endgame{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 
+}
+.lose>h2{
+    color: red;
+}
+.win>h2{
+    color: green
+}
 
 .loader {
-    display: inline-flex;
-    gap: 10px;
+    width: 60px;
+    aspect-ratio: 1;
+    background: linear-gradient(#dc1818 0 0) bottom/100% 0% no-repeat #ccc;
+    -webkit-mask: 
+      radial-gradient(circle at 60% 65%, #000 62%, #0000 65%) top left, 
+      radial-gradient(circle at 40% 65%, #000 62%, #0000 65%) top right, 
+      linear-gradient(to bottom left, #000 42%,#0000 43%) bottom left , 
+      linear-gradient(to bottom right,#000 42%,#0000 43%) bottom right;
+    -webkit-mask-size: 50% 50%;
+    -webkit-mask-repeat: no-repeat;
+    animation: l19 2s infinite linear;
   }
-  .loader:before,
-  .loader:after {
-    content: "";
-    height: 30px;
+@keyframes l19 {
+    90%,100% {background-size:100% 100%}
+}
+
+.loaderSpecial {
+    margin-top: 10%;
+    width: 250px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background:
-      radial-gradient(farthest-side,#000 95%,#0000) 35% 35%/6px 6px no-repeat
-      #fff;
-    transform: scaleX(var(--s,1)) rotate(0deg);
-    animation: l6 1s infinite linear;
-  }
-  .loader:after {
-    --s: -1;
-    animation-delay:-0.1s;
-  }
-  @keyframes l6 {
-    100% {transform:scaleX(var(--s,1)) rotate(360deg);}
-  }
+    background: #cd0c0c;
+    -webkit-mask: radial-gradient(circle closest-side at 50% 40%,#0000 94%, #000);
+    transform-origin: 50% 40%;
+    animation: l25 1s infinite linear;
+}
+@keyframes l25 {
+    100% {transform: rotate(1turn)}
+}
 
 @media screen and (max-width: 620px) {
     body{
@@ -128,5 +185,21 @@ hr{
         background-repeat: no-repeat;
         background-size: cover;
         height: 100vh;
+    }
+    header>div{
+        display: flex;
+        font-size: small;
+    }
+    header{
+        padding: 0px;
+    }
+    .aceuille{
+        width: 320px;
+    }
+    .aceuille>div{
+        display: none;
+    }
+    .card{
+        width: 160px;
     }
 }

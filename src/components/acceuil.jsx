@@ -1,5 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 import { TbPokeball } from "react-icons/tb";
+import { SiPokemon } from "react-icons/si";
 
 export default function Acceuil({modifDiff , modifDisplay , modifGame}){
 
@@ -10,7 +11,11 @@ export default function Acceuil({modifDiff , modifDisplay , modifGame}){
     }
 
     return(
-        <div className="aceuille">
+        <div className="aceuille pokeborder">
+            <div>
+            <h1> Bienvenue a <SiPokemon style={{ fontSize:"5rem"}}/>Memory Card</h1>
+            </div>
+            
             <h2 onClick={()=>{
                 clicked("easy" , 3)
             }}><TbPokeball />Facile</h2>

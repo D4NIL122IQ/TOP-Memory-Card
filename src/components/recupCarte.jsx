@@ -30,9 +30,13 @@ export default function Card({pokeurl , verify , index}){
     return(
         handleCloseLoader && 
         <div className="card" onClick={()=>{verify(index) }}>
-            <img src={data.sprites.front_default} alt={data.name +" front default image"} height="190px" width="200"/>
-            <hr />
-            <h4>{data.name}</h4>
+            <div>
+                <img src={data.sprites.front_default} alt={data.name +" front default image"} height="190px" width="200"/>
+            </div>
+            <div id="pokename">
+                <h4>{data.name}</h4>
+            </div>
+            
         </div>
     )
 }

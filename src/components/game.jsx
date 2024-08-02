@@ -3,7 +3,7 @@ import Card from "./recupCarte.jsx"
 import Loader from "./loader.jsx"
 import { getRandomNumber } from "../hook/getRandm.js"
 
-export default function Game({difficulter , limit, updatescore  , lose , win, updatescorelose}){
+export default function Game({difficulter , limit, updatescore  , lose , win, updatescoreToZero}){
 
     const [pokemon , setPokemon] = useState([])
     const [displayLoader , setDisplayLoader] = useState(true)
@@ -44,6 +44,7 @@ export default function Game({difficulter , limit, updatescore  , lose , win, up
         temp.map((t)=>{(t.clicked)? checkedcmp++ : null})
 
         if (checkedcmp == limit ) {
+            updatescoreToZero()
             win()
         }
     }
@@ -57,14 +58,14 @@ export default function Game({difficulter , limit, updatescore  , lose , win, up
             verify()
             mixArray()
         }else{
-            updatescorelose()
+            updatescoreToZero()
             lose()
         } 
     }
 
     return (
         <div className="cardContainer">
-            {displayLoader && <Loader />}
+            {displayLoader && <div className="loaderSpecial"> </div>}
             {pokemon.map((pk, i)=>{
                 return <Card pokeurl={pk.url} mixed={mixArray} index={i} verify={verifyGame} key={pk.name}/>
             })}

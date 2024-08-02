@@ -1,7 +1,15 @@
-export default function Lose({close}){
+import { FaGithub } from "react-icons/fa";
+import { TbPokeball } from "react-icons/tb";
+
+ export default function Win({close }){
     return (
-        <>
-            <button onClick={close}>Fermer</button>
-        </>
+        <div className="endgame pokeborder lose">
+            <h2>Vous avez perdu(e) cette partie !! </h2>
+            <div className="select">
+                <h3 onClick={close}><TbPokeball/>Aceuille ?</h3>
+                <h3><FaGithub/><a href="http://github.com/D4NIL122IQ" target="_blank" rel="noopener noreferrer">Github ?</a></h3>
+            </div>
+           
+        </div>
     )
-}
+ }
